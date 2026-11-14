@@ -316,3 +316,37 @@ h2 {
 .accent {
   color: var(--ac);
 }
+
+
+/* Action d’effacement : compacte, claire et accordée au bouton Coller. */
+#clear {
+  display: grid;
+  place-items: center;
+  flex: 0 0 46px;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border-color: color-mix(in srgb, var(--ac) 34%, var(--bd));
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--ac) 9%, var(--card));
+  color: var(--ac);
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1;
+  transition:
+    transform 160ms ease,
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    box-shadow 160ms ease;
+}
+#clear:hover {
+  transform: translateY(-1px);
+  border-color: var(--ac);
+  background: var(--ac);
+  color: var(--ac2);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--ac) 22%, transparent);
+}
+#clear:active {
+  transform: scale(0.96);
+}
