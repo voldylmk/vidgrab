@@ -38,6 +38,11 @@ function err(t) {
   $("msg").textContent = t;
   $("msg").hidden = !t;
 }
+function syncInputActions() {
+  var hasValue = $("url").value.trim().length > 0;
+  $("clear").hidden = !hasValue;
+  $("paste").hidden = hasValue;
+}
 function fmtDur(d) {
   d = d || 0;
   return Math.floor(d / 60) + ":" + ("0" + (d % 60)).slice(-2);
@@ -269,6 +274,7 @@ $("url").addEventListener("keydown", function (e) {
 });
 $("url").addEventListener("input", function () {
   chips(detect($("url").value.trim()));
+  syncInputActions();
 });
 $("paste").onclick = function () {
   try {
@@ -276,6 +282,7 @@ $("paste").onclick = function () {
       .readText()
       .then(function (t) {
         $("url").value = t;
+        syncInputActions();
         analyse();
       })
       .catch(function () {
@@ -287,6 +294,7 @@ $("paste").onclick = function () {
 };
 $("clear").onclick = function () {
   $("url").value = "";
+  syncInputActions();
   chips(null);
   err("");
   $("res").hidden = true;
@@ -297,6 +305,7 @@ $("clr").onclick = function () {
   save();
   render();
 };
+syncInputActions();
 chips(null);
 load();
 render();
