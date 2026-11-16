@@ -24,4 +24,11 @@ def explain(err: Exception) -> ApiError:
         return ApiError(404, "Vidéo introuvable ou supprimée.")
     if "unsupported url" in m:
         return ApiError(422, "Lien non pris en charge.")
+    if "facebook" in m and "cannot parse data" in m:
+        return ApiError(
+            502,
+            "Facebook ne fournit pas les données de cette vidéo. "
+            "Le lien peut nécessiter une connexion ou Facebook a modifié sa page. "
+            "Essaie un lien public accessible sans compte.",
+        )
     return ApiError(502, "Extraction impossible. La plateforme a peut-être changé : mets yt-dlp à jour.")
