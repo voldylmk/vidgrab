@@ -305,6 +305,26 @@ $("clr").onclick = function () {
   save();
   render();
 };
+function applyTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  var dark = theme === "dark";
+  var toggle = $("theme-toggle");
+  if (!toggle) return;
+  var label = dark ? "Passer au mode clair" : "Passer au mode sombre";
+  toggle.setAttribute("aria-label", label);
+  toggle.setAttribute("title", label);
+  $("theme-icon").textContent = dark ? "☀" : "☾";
+  $("theme-symbol").textContent = dark ? "☀" : "☾";
+  $("theme-label").textContent = dark ? "Mode clair" : "Mode sombre";
+}
+var savedTheme = localStorage.getItem("vg_theme");
+var initialTheme = savedTheme || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+applyTheme(initialTheme);
+$("theme-toggle").onclick = function () {
+  var next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+  localStorage.setItem("vg_theme", next);
+  applyTheme(next);
+};
 syncInputActions();
 chips(null);
 load();
