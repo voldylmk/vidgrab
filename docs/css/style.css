@@ -4,8 +4,8 @@
   --tx: #14140f;
   --mu: #6a675c;
   --bd: #dcd8ca;
-  --ac: #6d28d9;
-  --ac2: #fff;
+  --ac: #c4f04d;
+  --ac2: #10130a;
   --ok: #1a8a4a;
   --er: #c0392b;
   --sh: 0 8px 24px rgba(20, 20, 15, 0.07);
@@ -350,3 +350,14 @@ h2 {
 #clear:active {
   transform: scale(0.96);
 }
+
+/* Theme control */
+.theme-toggle{margin-left:auto;display:flex;align-items:center;gap:10px;min-width:104px;height:48px;padding:4px;border:1px solid var(--bd);border-radius:999px;background:var(--card);color:var(--tx)}
+.theme-toggle .theme-track{position:relative;display:block;width:68px;height:38px;border-radius:999px;background:#26262d;flex:none}
+.theme-toggle .theme-knob{position:absolute;top:3px;left:3px;width:32px;height:32px;border-radius:50%;background:#fff;transition:transform .2s ease}
+.theme-toggle .theme-symbol{position:absolute;right:8px;top:7px;color:#fff;font-size:17px;line-height:24px}
+:root[data-theme="dark"] .theme-toggle .theme-knob{transform:translateX(30px);background:#25252c}
+:root[data-theme="dark"] .theme-toggle .theme-track{background:#e8e8e4}
+:root[data-theme="dark"] .theme-toggle .theme-symbol{left:8px;right:auto;color:#181818}
+.theme-label{font-size:13px;white-space:nowrap}
+@media(max-width:600px){.theme-toggle{margin-left:auto;min-width:46px;width:46px;height:46px;justify-content:center;padding:0;border:0;background:transparent}.theme-toggle .theme-track{display:none}.theme-label{display:none}.theme-toggle .theme-icon{font-size:25px;line-height:1}}
