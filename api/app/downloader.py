@@ -6,6 +6,7 @@ import re
 import shutil
 import tempfile
 import time
+from urllib.parse import urlsplit
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -32,8 +33,8 @@ class MediaFile:
     ext: str
 
 
-def _options(cfg: Settings) -> dict:
-    return {
+def _options(cfg: Settings, url: str | None = None) -> dict:
+    options = {
         "quiet": True,
         "no_warnings": True,
         "noplaylist": True,
@@ -45,8 +46,11 @@ def _options(cfg: Settings) -> dict:
         "socket_timeout": 15,
         "max_filesize": cfg.max_filesize_mb * 1024 * 1024,
         "allowed_extractors": ALLOWED_EXTRACTORS,
-        "impersonate": "chrome",
     }
+    host = (urlsplit(url).hostname or "").lower() if url else ""
+    if host == "fb.watch" or host.endswith(".facebook.com") or host == "facebook.com":
+        options["impersonate"] = "chrome"
+    return options
 
 
 def _first_entry(data: dict | None) -> dict | None:
@@ -75,7 +79,7 @@ def purge_stale_tmp() -> None:
 def fetch_info(cfg: Settings, url: str) -> dict:
     """Métadonnées de la vidéo, sans la télécharger."""
     try:
-        with yt_dlp.YoutubeDL(_options(cfg) | {"skip_download": True}) as ydl:
+        with yt_dlp.YoutubeDL(_options(cfg, url) | {"skip_download": True}) as ydl:
             data = _first_entry(ydl.extract_info(url, download=False))
     except yt_dlp.utils.YoutubeDLError as e:
         raise explain(e) from e
@@ -110,7 +114,7 @@ def download_media(cfg: Settings, url: str, fmt: str, quality: int) -> MediaFile
             return "trop longue"
         return None
 
-    opts = _options(cfg) | {"outtmpl": str(tmpdir / "%(id)s.%(ext)s"), "match_filter": match_filter}
+    opts = _options(cfg, url) | {"outtmpl": str(tmpdir / "%(id)s.%(ext)s"), "match_filter": match_filter}
     if fmt == "mp4":
         opts["format"] = f"bv*[height<={quality}]+ba/b[height<={quality}]/b"
         opts["merge_output_format"] = "mp4"
