@@ -45,6 +45,7 @@ def _options(cfg: Settings) -> dict:
         "socket_timeout": 15,
         "max_filesize": cfg.max_filesize_mb * 1024 * 1024,
         "allowed_extractors": ALLOWED_EXTRACTORS,
+        "impersonate": "chrome",
     }
 
 
