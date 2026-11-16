@@ -313,9 +313,6 @@ function applyTheme(theme) {
   var label = dark ? "Passer au mode clair" : "Passer au mode sombre";
   toggle.setAttribute("aria-label", label);
   toggle.setAttribute("title", label);
-  $("theme-icon").textContent = dark ? "☀" : "☾";
-  $("theme-symbol").textContent = dark ? "☀" : "☾";
-  $("theme-label").textContent = dark ? "Mode clair" : "Mode sombre";
 }
 var savedTheme = localStorage.getItem("vg_theme");
 var initialTheme = savedTheme || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
