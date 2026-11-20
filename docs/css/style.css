@@ -364,3 +364,34 @@ h2 {
 .theme-toggle:hover .theme-track{border-color:var(--ac)}
 .theme-toggle:focus-visible{outline:2px solid var(--ac);outline-offset:3px}
 @media(max-width:600px){.theme-toggle{width:62px;height:36px}.theme-track{width:62px;height:36px;padding:3px}.theme-knob{top:3px;left:3px;width:28px;height:28px}.theme-option{top:3px;width:28px;height:28px}.theme-sun{left:3px}.theme-moon{right:3px}:root[data-theme="dark"] .theme-knob{transform:translateX(26px)}.brand{gap:9px}.brand h1{font-size:36px}}
+
+
+/* V2: recherche plus nette et interactions légères */
+.search-row{position:relative;align-items:center;gap:8px;padding:6px;border:1px solid var(--bd);border-radius:18px;background:color-mix(in srgb,var(--card) 88%,var(--bg));box-shadow:0 8px 22px rgba(20,20,15,.06);transition:border-color .2s ease,box-shadow .2s ease,transform .2s ease}
+.search-row:focus-within{border-color:color-mix(in srgb,var(--ac) 72%,var(--bd));box-shadow:0 0 0 4px color-mix(in srgb,var(--ac) 18%,transparent),0 12px 28px rgba(20,20,15,.08)}
+.search-mark{flex:none;padding-left:8px;color:var(--mu);font-size:28px;line-height:1;transform:rotate(-20deg)}
+.search-row input[type="text"]{border:0!important;background:transparent!important;box-shadow:none!important;outline:0!important;padding:12px 4px}
+#paste,#clear{border-radius:13px;min-height:44px;transition:transform .18s ease,background-color .18s ease,border-color .18s ease,box-shadow .18s ease}
+#paste{font-weight:600;background:var(--ac);border-color:var(--ac);color:var(--ac2)}
+.chips{min-height:30px;align-items:center}
+.chip{display:inline-flex;align-items:center;gap:7px;padding:5px 11px;border-radius:999px;background:color-mix(in srgb,var(--card) 86%,var(--bg));transition:background .2s ease,color .2s ease,border-color .2s ease,transform .2s ease}
+.chip-icon{width:15px;height:15px;display:grid;place-items:center;flex:none}
+.chip-icon svg{display:block;width:15px;height:15px}
+.chip.on{transform:translateY(-1px);box-shadow:0 3px 10px color-mix(in srgb,var(--ac) 18%,transparent)}
+button:not(:disabled){transition:transform .18s ease,box-shadow .18s ease,background-color .18s ease,border-color .18s ease}
+button:not(:disabled):hover{transform:translateY(-2px)}
+button:not(:disabled):active{transform:translateY(0) scale(.98)}
+button.pri{box-shadow:0 5px 0 color-mix(in srgb,var(--ac) 68%,#000 32%),0 8px 18px color-mix(in srgb,var(--ac) 20%,transparent)}
+button.pri:hover{box-shadow:0 3px 0 color-mix(in srgb,var(--ac) 68%,#000 32%),0 10px 22px color-mix(in srgb,var(--ac) 25%,transparent)}
+/* Sur mobile, un seul pictogramme discret indique l’action de bascule. */
+@media(max-width:600px){
+ .theme-toggle{display:grid;place-items:center;width:38px;height:38px;border:1px solid var(--bd);border-radius:50%;background:var(--card);box-shadow:0 2px 8px rgba(0,0,0,.08)}
+ .theme-track{display:none}
+ .theme-toggle::before{font-size:19px;line-height:1;color:var(--tx)}
+ :root[data-theme="dark"] .theme-toggle::before{content:"☀";color:var(--ac)}
+ :root[data-theme="light"] .theme-toggle::before{content:"☾"}
+ .search-row{gap:5px;padding:4px;border-radius:16px}
+ .search-mark{font-size:24px;padding-left:6px}
+ #paste,#clear{min-height:42px}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}}
