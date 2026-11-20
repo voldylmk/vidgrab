@@ -22,12 +22,47 @@ function detect(u) {
   } catch (e) {}
   return null;
 }
+function platformIcon(key) {
+  var ns = "http://www.w3.org/2000/svg";
+  var svg = document.createElementNS(ns, "svg");
+  svg.setAttribute("viewBox", "0 0 24 24");
+  svg.setAttribute("aria-hidden", "true");
+  if (key === "ig") {
+    var box = document.createElementNS(ns, "rect");
+    box.setAttribute("x", "3"); box.setAttribute("y", "3");
+    box.setAttribute("width", "18"); box.setAttribute("height", "18");
+    box.setAttribute("rx", "5"); box.setAttribute("fill", "none");
+    box.setAttribute("stroke", "currentColor"); box.setAttribute("stroke-width", "2");
+    var lens = document.createElementNS(ns, "circle");
+    lens.setAttribute("cx", "12"); lens.setAttribute("cy", "12");
+    lens.setAttribute("r", "4"); lens.setAttribute("fill", "none");
+    lens.setAttribute("stroke", "currentColor"); lens.setAttribute("stroke-width", "2");
+    var dot = document.createElementNS(ns, "circle");
+    dot.setAttribute("cx", "18"); dot.setAttribute("cy", "6"); dot.setAttribute("r", "1.4");
+    svg.appendChild(box); svg.appendChild(lens); svg.appendChild(dot);
+  } else {
+    var text = document.createElementNS(ns, "text");
+    text.setAttribute("x", "12"); text.setAttribute("y", "19");
+    text.setAttribute("text-anchor", "middle");
+    text.setAttribute("font-family", "system-ui,sans-serif");
+    text.setAttribute("font-weight", "700");
+    text.setAttribute("font-size", key === "tt" ? "20" : "21");
+    text.textContent = key === "x" ? "X" : key === "fb" ? "f" : "♪";
+    svg.appendChild(text);
+  }
+  return svg;
+}
 function chips(k) {
   $("chips").textContent = "";
   for (var i in P) {
     var s = document.createElement("span");
     s.className = "chip" + (i === k ? " on" : "");
-    s.textContent = P[i].n;
+    var icon = document.createElement("span");
+    icon.className = "chip-icon";
+    icon.style.color = P[i].c;
+    icon.appendChild(platformIcon(i));
+    s.appendChild(icon);
+    s.appendChild(document.createTextNode(P[i].n));
     $("chips").appendChild(s);
   }
 }
