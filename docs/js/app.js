@@ -27,28 +27,32 @@ function platformIcon(key) {
   var svg = document.createElementNS(ns, "svg");
   svg.setAttribute("viewBox", "0 0 24 24");
   svg.setAttribute("aria-hidden", "true");
+  var bg = document.createElementNS(ns, "rect");
+  bg.setAttribute("x", "1"); bg.setAttribute("y", "1");
+  bg.setAttribute("width", "22"); bg.setAttribute("height", "22");
+  bg.setAttribute("rx", "7"); bg.setAttribute("fill", P[key].c);
+  svg.appendChild(bg);
   if (key === "ig") {
-    var box = document.createElementNS(ns, "rect");
-    box.setAttribute("x", "3"); box.setAttribute("y", "3");
-    box.setAttribute("width", "18"); box.setAttribute("height", "18");
-    box.setAttribute("rx", "5"); box.setAttribute("fill", "none");
-    box.setAttribute("stroke", "currentColor"); box.setAttribute("stroke-width", "2");
+    var frame = document.createElementNS(ns, "rect");
+    frame.setAttribute("x", "5"); frame.setAttribute("y", "5");
+    frame.setAttribute("width", "14"); frame.setAttribute("height", "14");
+    frame.setAttribute("rx", "4"); frame.setAttribute("fill", "none");
+    frame.setAttribute("stroke", "#fff"); frame.setAttribute("stroke-width", "1.8");
     var lens = document.createElementNS(ns, "circle");
     lens.setAttribute("cx", "12"); lens.setAttribute("cy", "12");
-    lens.setAttribute("r", "4"); lens.setAttribute("fill", "none");
-    lens.setAttribute("stroke", "currentColor"); lens.setAttribute("stroke-width", "2");
+    lens.setAttribute("r", "3.2"); lens.setAttribute("fill", "none");
+    lens.setAttribute("stroke", "#fff"); lens.setAttribute("stroke-width", "1.8");
     var dot = document.createElementNS(ns, "circle");
-    dot.setAttribute("cx", "18"); dot.setAttribute("cy", "6"); dot.setAttribute("r", "1.4");
-    svg.appendChild(box); svg.appendChild(lens); svg.appendChild(dot);
+    dot.setAttribute("cx", "16.7"); dot.setAttribute("cy", "7.4");
+    dot.setAttribute("r", "1"); dot.setAttribute("fill", "#fff");
+    svg.appendChild(frame); svg.appendChild(lens); svg.appendChild(dot);
   } else {
-    var text = document.createElementNS(ns, "text");
-    text.setAttribute("x", "12"); text.setAttribute("y", "19");
-    text.setAttribute("text-anchor", "middle");
-    text.setAttribute("font-family", "system-ui,sans-serif");
-    text.setAttribute("font-weight", "700");
-    text.setAttribute("font-size", key === "tt" ? "20" : "21");
-    text.textContent = key === "x" ? "X" : key === "fb" ? "f" : "♪";
-    svg.appendChild(text);
+    var mark = document.createElementNS(ns, "path");
+    mark.setAttribute("fill", "#fff");
+    if (key === "x") mark.setAttribute("d", "M6.1 4.5h3.6l8.2 15h-3.6zM17.2 4.5h2.7l-9.7 15H7.5z");
+    if (key === "fb") mark.setAttribute("d", "M13.7 20v-7.1h2.4l.4-2.8h-2.8V8.3c0-.8.2-1.4 1.4-1.4h1.5V4.4c-.3 0-1.2-.1-2.2-.1-2.3 0-3.8 1.4-3.8 3.9v1.9H8.1v2.8h2.5V20z");
+    if (key === "tt") mark.setAttribute("d", "M15.1 4h3c.2 2 1.3 3.5 3 4v3.1a8 8 0 0 1-3-1v5.1c0 3.2-2.3 5.3-5.5 5.3-2.8 0-4.8-1.8-4.8-4.5 0-3.2 2.7-5.1 6-4.6v3.2c-1.8-.6-3 .1-3 1.4 0 .9.7 1.5 1.7 1.5 1.2 0 2-.8 2-2.4z");
+    svg.appendChild(mark);
   }
   return svg;
 }
