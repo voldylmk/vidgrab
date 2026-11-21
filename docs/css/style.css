@@ -470,3 +470,7 @@ main{max-width:760px;padding:26px 20px 52px}
  .brand-name h1{font-size:36px}
  .brand .sub{font-size:12px}
 }
+
+/* Espacement des plateformes et repère de version */
+.search-card .chips{margin-top:13px;padding-top:2px}
+.app-version{display:block;margin-top:5px;font-size:11px;letter-spacing:.25px;color:var(--mu)}
