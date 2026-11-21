@@ -476,4 +476,4 @@ main{max-width:760px;padding:26px 20px 52px}
 .app-version{display:block;margin-top:5px;font-size:11px;letter-spacing:.25px;color:var(--mu)}
 
 /* Laisser une vraie respiration entre le champ de lien et les plateformes. */
-.search-card > .chips{margin-top:16px!important;padding-top:0}
+.search-card > .chips{margin-top:12px!important;padding-top:0}
