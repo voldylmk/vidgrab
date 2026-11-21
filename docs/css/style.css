@@ -453,5 +453,20 @@ main{max-width:760px;padding:26px 20px 52px}
  #res .meta{font-size:16px}
 }
 @media(prefers-color-scheme:dark){
- body{background-image:radial-gradient(ellipse at 50% -18%,color-mix(in srgb,var(--ac) 8%,transparent),transparent 55%),linear-gradient(180deg,#15151a,var(--bg) 52%)}
+ :root:not([data-theme="light"]) body{background-image:radial-gradient(ellipse at 50% -18%,color-mix(in srgb,var(--ac) 8%,transparent),transparent 55%),linear-gradient(180deg,#15151a,var(--bg) 52%)}
+}
+
+
+/* Respect explicit light selection on every OS preference. */
+:root[data-theme="light"]{--bg:#f3f0e8;--card:#fffdf8;--tx:#14140f;--mu:#6a675c;--bd:#dcd8ca;--ac:#c4f04d;--ac2:#10130a;--ok:#1a8a4a;--er:#c0392b;--sh:0 8px 24px rgba(20,20,15,.07);color-scheme:light}
+:root[data-theme="light"] body{background-color:#f3f0e8;background-image:radial-gradient(ellipse at 50% -18%,rgba(196,240,77,.15),transparent 55%),linear-gradient(180deg,#fbfaf5,#f3f0e8 52%)}
+.brand{justify-content:flex-start;margin:6px 0 24px}
+.brand img{width:64px;height:64px;border-radius:14px}
+.brand-name h1{font-size:44px;letter-spacing:-1.5px}
+.brand .sub{font-size:16px;margin:4px 0 0}
+@media(max-width:600px){
+ .brand{margin:4px 0 28px}
+ .brand img{width:54px;height:54px}
+ .brand-name h1{font-size:36px}
+ .brand .sub{font-size:12px}
 }
