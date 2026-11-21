@@ -491,3 +491,10 @@ main{max-width:760px;padding:26px 20px 52px}
  .search-card .chip{flex:0 0 auto;min-width:0;justify-content:flex-start;white-space:nowrap;overflow:visible;text-overflow:clip;gap:7px;padding:6px 11px;font-size:12px}
  .search-card .chip-icon,.search-card .chip-icon svg{width:15px;height:15px}
 }
+
+
+/* Keep history compact: about six rows are visible, older downloads scroll below. */
+#hist{max-height:252px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:var(--bd) transparent;padding-right:6px}
+#hist::-webkit-scrollbar{width:7px}
+#hist::-webkit-scrollbar-track{background:transparent}
+#hist::-webkit-scrollbar-thumb{background:var(--bd);border-radius:999px}
