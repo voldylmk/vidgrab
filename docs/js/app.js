@@ -142,8 +142,14 @@ function analyse() {
   }
   $("go").disabled = true;
   $("go").textContent = "Analyse…";
+  var wakeTimer = null;
+  var wakeSeconds = 0;
   var wk = setTimeout(function () {
-    $("go").textContent = "Réveil du serveur…";
+    $("go").textContent = "Réveil du serveur… 0 s";
+    wakeTimer = setInterval(function () {
+      wakeSeconds += 1;
+      $("go").textContent = "Réveil du serveur… " + wakeSeconds + " s";
+    }, 1000);
   }, 6000);
   api("/info?url=" + encodeURIComponent(u))
     .then(function (r) {
@@ -179,6 +185,7 @@ function analyse() {
     })
     .then(function () {
       clearTimeout(wk);
+      if (wakeTimer) clearInterval(wakeTimer);
       $("go").disabled = false;
       $("go").textContent = lbl();
     });
